@@ -29,7 +29,7 @@ else:
     client = OpenAI(api_key=openai_api_key)
 
      # Create three tabs: "Upload CSV", "About Us", "Methodology"
-    tab1, tab2, tab3 = st.tabs(["Upload CSV", "About Us", "Methodology"])
+    tab1, tab2, tab3 = st.tabs(["Main", "About Us", "Methodology"])
     
     with tab1:
         # Show title and description.
@@ -110,10 +110,35 @@ else:
             plot_user_selection(df)
 
 
-    with tab2:
+     with tab2:
         st.header("About Us")
-        st.write("This chatbot app is designed to facilitate conversations using OpenAI's API. "
-                 "Our team is focused on leveraging AI for impactful, user-friendly applications.")
+        
+        # Adding structured content in paragraphs
+        st.subheader("Project Scope")
+        st.write(
+            "Use LLM to do the aggregation, frequency analysis, and categorisation. For a holistic package, we also "
+            "provide templates on Tableau or Qualtrics to help officers conduct surveys, then present the data, "
+            "findings, and insights on a dashboard for their senior leaders. Databricks can be utilized to port Excel data "
+            "into the product to simplify importing survey data into the platform."
+        )
+        
+        st.subheader("Objectives")
+        st.write(
+            "To empower officers with a quick and easy overview of potential visualizations and leverage LLM "
+            "capabilities to generate code and insights from the uploaded data sources with just a few clicks."
+        )
+        
+        st.subheader("Data Sources")
+        st.write(
+            "In this proof of concept (POC), any open data sources can be used to quickly and easily show potential "
+            "visualizations for use."
+        )
+        
+        st.subheader("Features")
+        st.write(
+            "This app includes features such as file upload capabilities, visualization using Plotly, extraction "
+            "of visualizations, and the use of LLM for further improvements and quick insights."
+        )
 
     with tab3:
         st.header("Methodology")
