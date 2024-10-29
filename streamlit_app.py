@@ -143,4 +143,4 @@ else:
     with tab3:
         st.header("Methodology")
         st.write("The app uses OpenAI's GPT-3.5 model for data-driven responses and customizable user interactions.")
-        st.image("flow.png", caption="Methodology Diagram", use_column_width=True)
+        st.image("flow.jpg", caption="Methodology Diagram", use_column_width=True)
