@@ -29,7 +29,7 @@ else:
     openai_api_key = st.secrets["openai_api_key"]
     client = OpenAI(api_key=openai_api_key)
 
-     # Create three tabs: "Upload CSV", "About Us", "Methodology"
+    # Create three tabs: "Upload CSV", "About Us", "Methodology"
     tab1, tab2, tab3 = st.tabs(["Main", "About Us", "Methodology"])
     
     with tab1:
@@ -53,7 +53,7 @@ else:
         else:
             # Option to use sample datasets if no file is uploaded
             st.write("Choose a sample dataset:")
-            sample_data = st.selectbox("Select a sample dataset", ["Iris", "Diabetes", "Heart", "Titanic", "Energy", "Airline", "Traffic"])
+            sample_data = st.selectbox("Select a sample dataset", ["Iris", "Diabetes", "Titanic", "Airline", "Traffic"])
             
             # Loading selected sample datasets
             if sample_data == "Iris":
@@ -71,23 +71,11 @@ else:
                 st.write(df.head())
                 st.session_state["csv_data"] = df
 
-            elif sample_data == "Heart":
-                heart = sns.load_dataset("heart")
-                st.write("Using Heart dataset:")
-                st.write(heart.head())
-                st.session_state["csv_data"] = heart
-
             elif sample_data == "Titanic":
                 titanic = sns.load_dataset("titanic")
                 st.write("Using Titanic dataset:")
                 st.write(titanic.head())
                 st.session_state["csv_data"] = titanic
-
-            elif sample_data == "Energy":
-                energy = pd.read_csv("https://raw.githubusercontent.com/jbrownlee/Datasets/master/household_power_consumption.txt", delimiter=';', low_memory=False)
-                st.write("Using Energy dataset:")
-                st.write(energy.head())
-                st.session_state["csv_data"] = energy
 
             elif sample_data == "Airline":
                 airline = pd.read_csv("https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat", header=None)
