@@ -2,7 +2,8 @@ import streamlit as st
 from openai import OpenAI
 import pandas as pd
 import plotly.express as px
-import json
+from sklearn.datasets import load_iris
+import seaborn as sns
 
 # Set a password (change 'your_password' to a strong password)
 PASSWORD = "password"
@@ -48,6 +49,24 @@ else:
             st.write("File Loaded:")
             st.write(df.head())
             st.session_state["csv_data"] = df  # Store data for later use
+
+        else:
+            # Option to use sample datasets if no file is uploaded
+            st.write("Or choose a sample dataset:")
+            sample_data = st.selectbox("Select a sample dataset", ["None", "Iris", "Titanic"])
+            
+            if sample_data == "Iris":
+                iris = load_iris(as_frame=True)
+                df = pd.concat([iris.data, pd.DataFrame(iris.target, columns=["target"])], axis=1)
+                st.write("Using Iris dataset:")
+                st.write(df.head())
+                st.session_state["csv_data"] = df
+
+            elif sample_data == "Titanic":
+                titanic = sns.load_dataset("titanic")  # Requires seaborn
+                st.write("Using Titanic dataset:")
+                st.write(titanic.head())
+                st.session_state["csv_data"] = titanic
 
         # Chatbot conversation
         if "messages" not in st.session_state:
