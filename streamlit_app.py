@@ -2,7 +2,7 @@ import streamlit as st
 from openai import OpenAI
 import pandas as pd
 import plotly.express as px
-from sklearn.datasets import load_iris
+from sklearn.datasets import load_iris, load_diabetes
 import seaborn as sns
 
 # Set a password (change 'your_password' to a strong password)
@@ -52,9 +52,10 @@ else:
 
         else:
             # Option to use sample datasets if no file is uploaded
-            st.write("Or choose a sample dataset:")
-            sample_data = st.selectbox("Select a sample dataset", ["None", "Iris", "Titanic"])
+            st.write("Choose a sample dataset:")
+            sample_data = st.selectbox("Select a sample dataset", ["Iris", "Diabetes", "Heart", "Titanic", "Energy", "Airline", "Traffic"])
             
+            # Loading selected sample datasets
             if sample_data == "Iris":
                 iris = load_iris(as_frame=True)
                 df = pd.concat([iris.data, pd.DataFrame(iris.target, columns=["target"])], axis=1)
@@ -62,11 +63,44 @@ else:
                 st.write(df.head())
                 st.session_state["csv_data"] = df
 
+            elif sample_data == "Diabetes":
+                diabetes = load_diabetes(as_frame=True)
+                df = diabetes.data
+                df["target"] = diabetes.target
+                st.write("Using Diabetes dataset:")
+                st.write(df.head())
+                st.session_state["csv_data"] = df
+
+            elif sample_data == "Heart":
+                heart = sns.load_dataset("heart")
+                st.write("Using Heart dataset:")
+                st.write(heart.head())
+                st.session_state["csv_data"] = heart
+
             elif sample_data == "Titanic":
-                titanic = sns.load_dataset("titanic")  # Requires seaborn
+                titanic = sns.load_dataset("titanic")
                 st.write("Using Titanic dataset:")
                 st.write(titanic.head())
                 st.session_state["csv_data"] = titanic
+
+            elif sample_data == "Energy":
+                energy = pd.read_csv("https://raw.githubusercontent.com/jbrownlee/Datasets/master/household_power_consumption.txt", delimiter=';', low_memory=False)
+                st.write("Using Energy dataset:")
+                st.write(energy.head())
+                st.session_state["csv_data"] = energy
+
+            elif sample_data == "Airline":
+                airline = pd.read_csv("https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat", header=None)
+                airline.columns = ["Airport ID", "Name", "City", "Country", "IATA", "ICAO", "Latitude", "Longitude", "Altitude", "Timezone", "DST", "Tz database time zone", "Type", "Source"]
+                st.write("Using Airline dataset:")
+                st.write(airline.head())
+                st.session_state["csv_data"] = airline
+
+            elif sample_data == "Traffic":
+                traffic = pd.read_csv("https://people.sc.fsu.edu/~jburkardt/data/csv/hw_200.csv")
+                st.write("Using Traffic dataset:")
+                st.write(traffic.head())
+                st.session_state["csv_data"] = traffic
 
         # Chatbot conversation
         if "messages" not in st.session_state:
