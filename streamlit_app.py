@@ -19,7 +19,8 @@ if not st.session_state.authenticated:
     if st.button("Submit"):
         if password == PASSWORD:
             st.session_state.authenticated = True
-            st.experimental_rerun()
+            # Set query params to focus on Tab 1 directly after password verification
+            st.experimental_set_query_params(tab="Main")
         else:
             st.error("Incorrect password. Try again.")
 
