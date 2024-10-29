@@ -19,7 +19,7 @@ if not st.session_state.authenticated:
     if st.button("Submit"):
         if password == PASSWORD:
             st.session_state.authenticated = True
-            st.success("Access granted!")
+            st.success("Password verified! Welcome to the app.")
         else:
             st.error("Incorrect password. Try again.")
 
