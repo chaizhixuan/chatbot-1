@@ -16,6 +16,16 @@ if "authenticated" not in st.session_state:
 if not st.session_state.authenticated:
     st.title("🔒 Enter Password to Access")
 
+    password = st.text_input("Password", type="password")
+    
+    if st.button("Submit"):
+        if password == PASSWORD:
+            st.session_state.authenticated = True
+            st.success("Password verified! Please click submit button again to enter the app.")
+        else:
+            st.error("Incorrect password. Try again.")
+
+    # Display the important notice below the button
     st.markdown(
         """
         ### IMPORTANT NOTICE:
@@ -28,14 +38,6 @@ if not st.session_state.authenticated:
         Always consult with qualified professionals for accurate and personalized advice.
         """
     )
-    password = st.text_input("Password", type="password")
-    
-    if st.button("Submit"):
-        if password == PASSWORD:
-            st.session_state.authenticated = True
-            st.success("Password verified! Please click submit button again to enter the app.")
-        else:
-            st.error("Incorrect password. Try again.")
 
 else:
     # Access OpenAI API key directly from secrets
