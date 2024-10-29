@@ -28,6 +28,9 @@ else:
     openai_api_key = st.secrets["openai_api_key"]
     client = OpenAI(api_key=openai_api_key)
 
+    # Tabs for "About Us" and "Methodology"
+    tab1, tab2 = st.tabs(["About Us", "Methodology"])
+    
     # Show title and description.
     st.title("💬 Chatbot with CSV File Upload and Visualization")
     st.write("This app lets you upload CSV or Excel files, visualize data, and interact with an AI chatbot using OpenAI's API.")
