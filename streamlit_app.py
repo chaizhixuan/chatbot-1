@@ -110,7 +110,7 @@ else:
             plot_user_selection(df)
 
 
-     with tab2:
+    with tab2:
         st.header("About Us")
         
         # Adding structured content in paragraphs
